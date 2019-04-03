@@ -11,10 +11,25 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
     },
-  });
+  },
+  { underscored: true });
 
   User.associate = (models) => {
-    models.User.hasMany(models.Task);
+    User.belongsToMany(models.Team, {
+      through: 'member',
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+      },
+    });
+    // 1:M
+    User.belongsToMany(models.Channel, {
+      through: 'channel_member',
+      foreignKey: {
+        name: 'userId',
+        field: 'user_id',
+      },
+    });
   };
 
   return User;
