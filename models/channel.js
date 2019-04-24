@@ -1,5 +1,5 @@
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Channel = sequelize.define('channel', {
     name: {
       type: DataTypes.STRING,
@@ -7,8 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     public: {
       type: DataTypes.BOOLEAN,
     },
-  },
-  { underscored: true });
+  });
 
   Channel.associate = (models) => {
     // 1:M

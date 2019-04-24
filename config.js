@@ -5,5 +5,8 @@ module.exports = {
     port: 5432,
     password: 'docker',
     dialect: 'postgres',
+    define: {
+      underscored: true,
+    },
   },
 };

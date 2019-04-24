@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const User = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING,
     },
-  },
-  { underscored: true });
+  });
 
   User.associate = (models) => {
     User.belongsToMany(models.Team, {
