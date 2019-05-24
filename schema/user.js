@@ -8,9 +8,17 @@ export default gql`
     teams: [Team!]!
   }
 
+  type MutationResponse implements MutationResponseInterface {
+    code: String!
+    success: Boolean!
+    message: String!
+    user: User
+  }
+
   input userInput {
     email: String!
     username: String!
+    password: String!
   }
 
   extend type Query  {
@@ -19,6 +27,6 @@ export default gql`
   }
 
   extend type Mutation {
-    createUser(newUser: userInput!): User
+    register(newUser: userInput!): MutationResponse
   }
 `;
