@@ -13,6 +13,7 @@ export default gql`
     success: Boolean!
     message: String!
     user: User
+    errors: [Error!]
   }
 
   input userInput {

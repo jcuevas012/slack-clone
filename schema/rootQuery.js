@@ -9,10 +9,16 @@ const typeDef = gql`
     _:String
   }
 
+  type Error {
+    path: String!
+    message: String!
+  }
+  
   interface MutationResponseInterface {
     code: String!
     success: Boolean!
     message: String!
+    errors: [Error]
   }
 `;
 

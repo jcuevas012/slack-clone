@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import util from '../util';
 
 export default {
   Query: {
@@ -6,14 +7,22 @@ export default {
     allUsers: (_, args, { dataSources }) => dataSources.models.User.findAll(),
   },
   Mutation: {
-    register: async (_, { newUser }, { dataSources }) => {
-      const hash = await bcrypt.hash(newUser.password, 12);
-      const user = await dataSources.models.User.create({ ...newUser, password: hash });
-      return {
-        code: 200,
-        user,
-        message: 'User created success',
-      };
+    register: async (_, { newUser }, { dataSources: { models } }) => {
+      try {
+        const hash = await bcrypt.hash(newUser.password, 12);
+        const user = await models.User.create({ ...newUser, password: hash });
+        return {
+          code: 200,
+          user,
+          message: 'User created success',
+        };
+      } catch (error) {
+        return {
+          code: 500,
+          message: 'Something went wrong',
+          errors: util.formatErrors(error, models),
+        };
+      }
     },
   },
 };

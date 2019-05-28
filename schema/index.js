@@ -1,9 +1,9 @@
-import userQuery from './user';
-import teamQuery from './team';
-import channelQuery from './channel';
-import messageQuery from './message';
+import userSchema from './user';
+import teamSchema from './team';
+import channelSchema from './channel';
+import messageSchema from './message';
 
-const { typeDef: rootQuery } = require('./rootQuery');
+const { typeDef: rootSchema } = require('./rootQuery');
 
 
-export default [rootQuery, userQuery, teamQuery, channelQuery, messageQuery];
+export default [rootSchema, userSchema, teamSchema, channelSchema, messageSchema];
