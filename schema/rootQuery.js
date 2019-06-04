@@ -19,7 +19,7 @@ const typeDef = gql`
     success: Boolean!
     message: String!
     errors: [Error]
-  }
+}
 `;
 
 module.exports = {

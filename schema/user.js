@@ -8,12 +8,21 @@ export default gql`
     teams: [Team!]!
   }
 
-  type MutationResponse implements MutationResponseInterface {
+  type UserMutationResponse implements MutationResponseInterface {
     code: String!
     success: Boolean!
     message: String!
     user: User
     errors: [Error!]
+  }
+
+  type LoginMutationResponse implements MutationResponseInterface { 
+    code: String!
+    success: Boolean!
+    message: String!
+    errors: [Error]
+    token: String
+    refreshToken: String
   }
 
   input userInput {
@@ -28,6 +37,7 @@ export default gql`
   }
 
   extend type Mutation {
-    register(newUser: userInput!): MutationResponse
+    register(newUser: userInput!): UserMutationResponse
+    login(email: String!, password: String!): LoginMutationResponse
   }
 `;
