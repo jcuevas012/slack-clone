@@ -9,10 +9,16 @@ export default gql`
     channels: [Channel!]!
   }
 
+  type TeamMutationResponse implements MutationResponseInterface {
+    code: String!
+    success: Boolean!
+    message: String!
+    errors: [Error]
+  }
 
   
   extend type Mutation {
-    createTeam(name: String!): Team
+    createTeam(name: String!): TeamMutationResponse
   }
 
 `;

@@ -16,8 +16,14 @@ export default gql`
     public: Boolean = false
   }
 
+  type ChannelMutationResponse implements MutationResponseInterface {
+    code: String!
+    success: Boolean!
+    message: String!
+    errors: [Error]
+  } 
   
   extend type Mutation {
-    createChannel(newChannel: channelInput!): Channel
+    createChannel(newChannel: channelInput!): ChannelMutationResponse
   }
 `;

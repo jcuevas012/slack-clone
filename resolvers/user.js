@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 import util from '../services/util';
 import { tryLogin } from '../services/auth';
 
@@ -11,8 +10,7 @@ export default {
     login: async (_, { email, password }, { dataSources, SECRET, SECRET2 }) => tryLogin(email, password, dataSources.models, SECRET, SECRET2),
     register: async (_, { newUser }, { dataSources: { models } }) => {
       try {
-        const hash = await bcrypt.hash(newUser.password, 12);
-        const user = await models.User.create({ ...newUser, password: hash });
+        const user = await models.User.create(newUser);
         return {
           code: 200,
           user,
