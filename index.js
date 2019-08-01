@@ -5,7 +5,6 @@ import resolvers from './resolvers';
 import models from './models';
 import { getUserFromRequest } from './services/util';
 
-
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -21,9 +20,9 @@ const server = new ApolloServer({
   context: async ({ req, res }) => ({
     SECRET,
     SECRET2,
-    user: await getUserFromRequest(req, res, SECRET, SECRET2, models),
+    user: await getUserFromRequest(req, res, SECRET, SECRET2, models)
   }),
-  dataSources: () => ({ models }),
+  dataSources: () => ({ models })
 });
 
 server.applyMiddleware({ app, path });

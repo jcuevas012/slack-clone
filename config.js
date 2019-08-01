@@ -3,10 +3,10 @@ module.exports = {
     database: 'slack',
     username: 'postgres',
     port: 5432,
-    password: 'docker',
+    password: 'postgres',
     dialect: 'postgres',
     define: {
-      underscored: true,
-    },
-  },
+      underscored: true
+    }
+  }
 };
