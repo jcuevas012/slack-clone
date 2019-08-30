@@ -9,7 +9,17 @@ export default {
   Mutation: {
     createTeam: async (_, args, { dataSources, user }, info) => {
       try {
-        await dataSources.models.Team.create({ ...args, owner: user.id })
+        const team = await dataSources.models.Team.create({
+          ...args,
+          owner: user.id
+        })
+
+        dataSources.models.Channel.create({
+          name: 'general',
+          public: true,
+          teamId: team.id
+        })
+
         return {
           code: 200,
           success: true,
@@ -28,6 +38,8 @@ export default {
     channels: async (parent, args, { dataSources }, info) =>
       dataSources.models.Channel.findAll({
         where: { teamId: parent.id }
-      })
+      }),
+    owner: async (parent, args, { dataSources }, info) =>
+      dataSources.models.User.findByPk(parent.owner)
   }
 }
